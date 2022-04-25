@@ -11,6 +11,7 @@ import {
   aws_logs as logs,
 } from "aws-cdk-lib";
 import { Construct } from "constructs";
+import * as path from "path";
 
 export class GlobalEndpointsStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
@@ -49,12 +50,15 @@ export class GlobalEndpointsStack extends Stack {
     });
 
     new nodejs.NodejsFunction(this, "PutEventsToGlobalEndpointsFunction", {
-      entry: "src/lambda/handlers/put-events-to-global-endpoints.ts",
+      entry: path.join(
+        __dirname,
+        "../src/lambda/handlers/put-events-to-global-endpoints.ts"
+      ),
       runtime: lambda.Runtime.NODEJS_14_X,
       bundling: {
         minify: true,
         sourceMap: true,
-        nodeModules: ["aws-crt", "@aws-sdk/signature-v4-crt"],
+        nodeModules: ["aws-crt"],
       },
       environment: {
         EVENT_BUS_NAME: globalEndpointsEventBus.eventBusName,

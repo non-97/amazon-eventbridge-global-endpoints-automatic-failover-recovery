@@ -23,7 +23,6 @@
   },
   "dependencies": {
     "@aws-sdk/client-eventbridge": "^3.76.0",
-    "@aws-sdk/signature-v4-crt": "^3.66.0",
     "aws-cdk-lib": "2.21.1",
     "aws-crt": "^1.12.1",
     "constructs": "^10.0.0",
